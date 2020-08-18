@@ -40,6 +40,7 @@ app.get('/blogs/:id', (req, res) => {
 app.post('/blogs', (req, res) => {
     const body = req.body;
     const blog = Blog(body);
+    blog._id = 1;
     blog.save()
         .then(() => res.json({
             success: true,
