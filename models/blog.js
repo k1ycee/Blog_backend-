@@ -23,7 +23,7 @@ const blogSchema = new Schema({
         data: Buffer,
         contentType: String,
     }
-}, { timestamps: true, autoIndex: false });
+}, { timestamps: true, autoCreate: true });
 
 
 const Blog = mongoose.model('Blog', blogSchema);
