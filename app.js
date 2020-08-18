@@ -21,7 +21,7 @@ mongoose.connect("mongodb+srv://Denzel:mechaD00dle@blog.zcoup.mongodb.net/blog?r
 
 
 app.get('/', (req, res) => {
-    res.redirect('https://www.pornhub.com')
+    res.redirect('/blogs')
 });
 app.get('/blogs', (req, res) => {
     const blog = Blog;
