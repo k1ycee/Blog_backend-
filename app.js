@@ -1,17 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors')
 const app = express();
 const port = process.env.PORT || 3000;
 const Blog = require('./models/blog')
 
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 
-
-
+// var parse = bodyParser.urlencoded({ extended: true });
 
 mongoose.connect("mongodb+srv://Denzel:mechaD00dle@blog.zcoup.mongodb.net/blog?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => app.listen(port, () => {
@@ -68,6 +69,23 @@ app.delete('/blogs/:id', (req, res) => {
         }))
 });
 
-app.put('/blogs/:id', (req, res) => {
+app.put('/blogs/:id',(req, res) => {
     const id = req.params.id;
+    Blog.findById({_id: id},(err, data) => {
+        if(err){
+            res.send(err);
+        }
+        data.title = req.body.title,
+        data.snippet = req.body.snippet,
+        data.body = req.body.body
+        data.save()
+            .then(() => res.json({
+                success: true,
+                message: "Blog Successfully updated"
+            }))
+            .catch(() => res.json({
+                success: false,
+                message: "Blog was updated"
+            }))
+    })
 });
