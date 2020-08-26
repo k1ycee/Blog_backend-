@@ -14,7 +14,7 @@ app.use(cors());
 
 // var parse = bodyParser.urlencoded({ extended: true });
 
-mongoose.connect("mongodb+srv://Denzel:mechaD00dle@blog.zcoup.mongodb.net/blog?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => app.listen(port, () => {
         console.log(`Server started on port ${port}`);
     })).catch((err) => console.log(err))
