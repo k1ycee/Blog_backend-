@@ -17,11 +17,11 @@ const blogSchema = new Schema({
     body: {
         type: String,
         required: true
-
+        
     },
     img:{
         data: Buffer,
-        contentType: String,
+        type: String,
     }
 }, { timestamps: true });
 

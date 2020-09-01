@@ -1,20 +1,33 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+// const multer = require('multer');
 const cors = require('cors')
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3030;
 const Blog = require('./models/blog')
 
 
+
+
+// app.use((req, res, next) => {
+//     res.append('Access-Control-Allow-Origin', 'http://localhost:4200');
+//     res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+//     res.append("Access-Control-Allow-Headers", "Origin, Accept,Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+//     res.append('Access-Control-Allow-Credentials', true);
+//     next();
+// });
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+// // app.use(bodyParser.raw({ extended: true }));
+// // app.use(cors({
+// //     origin: '*'
+// // }));
 
 
 // var parse = bodyParser.urlencoded({ extended: true });
 
-mongoose.connect("", { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb+srv://Denzel:mechaD00dle@blog.zcoup.mongodb.net/blog?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => app.listen(port, () => {
         console.log(`Server started on port ${port}`);
     })).catch((err) => console.log(err))
@@ -38,9 +51,15 @@ app.get('/blogs/:id', (req, res) => {
         .catch((err) => console.error(err))
 });
 
-app.post('/blogs', (req, res) => {
+app.post('/blogs',(req, res) => {
     const body = req.body;
-    const blog = Blog(body);
+    console.log(req.file);
+    const blog = new Blog({
+        title : body.title,
+        snippet: body.snippet,
+        body: body.body
+        // img: req.file.filename
+    });
     // blog._id = 1;
     blog.save()
         .then(() => res.json({
