@@ -20,7 +20,6 @@ const blogSchema = new Schema({
         
     },
     img:{
-        data: Buffer,
         type: String,
     }
 }, { timestamps: true });
