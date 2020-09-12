@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const dotenv = require("dotenv");
 const cors = require('cors')
-const routes = require('../backend/routes/route_exports')
+const router = require('../backend/routes/route_exports')
 const app = express();
 const cloudinary = require('cloudinary')
 const port = process.env.PORT || 3030;
@@ -12,7 +12,7 @@ dotenv.config();
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
-app.use(routes);
+app.use(router);
 app.get('/', (req, res) => {
     res.redirect('/blogs')
 })
