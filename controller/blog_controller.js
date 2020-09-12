@@ -25,7 +25,6 @@ exports.createNewblog = async (req, res, next) => {
     try {
         const image = req.file.path;
         const result = await cloudinary.uploader.upload(image)
-        console.log(result.url);
         const body = req.body;
         const blog = new Blog({
             title: body.title,
@@ -33,7 +32,8 @@ exports.createNewblog = async (req, res, next) => {
             body: body.body,
             img: result.url
         });
-        await blog.save();
+        // console.log(blog);
+        blog.save();
         return res.status(201).json({
             message: "Blog created Created Successfully",
             blog
