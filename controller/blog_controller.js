@@ -3,29 +3,28 @@ const cloudinary = require('cloudinary').v2;
 
 
 exports.getAllBlogs = async (req, res, next) => {
-    try{
+    try {
         const blog = await Blog.find({});
         return res.status(200).json(blog);
-    }catch(e){
+    } catch (e) {
         next(e);
     }
 }
 
-exports.getSingleBlog = async  (req, res, next) => {
-    try{
+exports.getSingleBlog = async (req, res, next) => {
+    try {
         const id = req.params.id;
         const result = await Blog.findById(id)
         return res.status(200).json(result);
-    }catch(e){
+    } catch (e) {
         next(e)
     }
 }
 
 exports.createNewblog = async (req, res, next) => {
-    const image = req.file.path;
-    // console.log(image);
-    const result = await cloudinary.uploader.upload(image)
-    try{
+    try {
+        const image = req.file.path;
+        const result = await cloudinary.uploader.upload(image)
         const body = req.body;
         const blog = new Blog({
             title: body.title,
@@ -38,26 +37,26 @@ exports.createNewblog = async (req, res, next) => {
             message: "Blog created Created Successfully",
             blog
         });
-    }catch(e){
+    } catch (e) {
         next(e)
     }
 }
 
 exports.deleteSingleBlog = async (req, res, next) => {
-    try{
+    try {
         const id = req.params.id;
         await Blog.findByIdAndDelete(id)
         return res.status(204).json({
             success: true,
             message: "Successfully Deleted Blog"
         })
-    }catch(e){
+    } catch (e) {
         next(e)
     }
 }
 
-exports.editBlog =  async (req, res, next) => {
-    try{
+exports.editBlog = async (req, res, next) => {
+    try {
         const id = req.params.id;
         Blog.findById({ _id: id }, async (err, data) => {
             if (err) {
@@ -73,7 +72,7 @@ exports.editBlog =  async (req, res, next) => {
                 data
             })
         })
-    }catch(e){
+    } catch (e) {
         next(e);
     }
 }
