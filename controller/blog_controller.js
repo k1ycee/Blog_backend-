@@ -33,7 +33,7 @@ exports.createNewblog = async (req, res, next) => {
             img: result.url
         });
         // console.log(blog);
-        blog.save();
+        await blog.save();
         return res.status(201).json({
             message: "Blog created Created Successfully",
             blog

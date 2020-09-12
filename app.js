@@ -17,10 +17,12 @@ app.get('/', (req, res) => {
     res.redirect('/blogs')
 })
 cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET
+    cloud_name: "dchsw3ztg",
+    api_key: "233568856113656",
+    api_secret: "Uh3sZPzhyFFTieVzZPly3co3q3s"
 });
+
+// console.log(process.env.API_KEY);
 
 mongoose.connect("mongodb+srv://Denzel:mechaD00dle@blog.zcoup.mongodb.net/blog?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => app.listen(port, () => {
