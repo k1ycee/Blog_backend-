@@ -10,7 +10,7 @@ const port = process.env.PORT || 3030;
 
 dotenv.config();
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 app.use(router);
 app.get('/', (req, res) => {
